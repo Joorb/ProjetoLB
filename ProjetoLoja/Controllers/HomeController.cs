@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoLoja.Models;
+using ProjetoLoja.Repositorio;
 using System.Diagnostics;
 
 namespace ProjetoLoja.Controllers
@@ -7,21 +8,21 @@ namespace ProjetoLoja.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ProdutoRepositorio _produtoRepositorio;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ProdutoRepositorio produtoRepositorio)
         {
             _logger = logger;
+            _produtoRepositorio = produtoRepositorio;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
+            var produtos = await _produtoRepositorio.TodosProdutos();
+            return View(produtos);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
