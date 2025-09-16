@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoLoja.Repositorio;
+using ProjetoLoja.Models;
 
 namespace ProjetoBrinquedos.Controllers
 {
