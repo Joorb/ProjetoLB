@@ -1,4 +1,8 @@
-﻿namespace ProjetoLoja.Repositorio
+﻿using MySql.Data.MySqlClient;
+using Dapper;
+using ProjetoLoja.Models;
+
+namespace ProjetoLoja.Repositorio
 {
     public class ProdutoRepositorio
     {
@@ -7,6 +11,12 @@
         public ProdutoRepositorio(string connectionString)
         {
             _connectionString = connectionString;
+        }
+        public async Task<IEnumerable<Produto>> TodosProdutos()
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            var sql = "SELECT Id, Nome, Descricao, Preco, ImageUrl, Estoque FROM Produtos";
+            return await connection.QueryAsync<Produto>(sql);
         }
     }
 }
