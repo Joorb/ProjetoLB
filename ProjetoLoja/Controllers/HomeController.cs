@@ -18,7 +18,6 @@ namespace ProjetoLoja.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
             var produtos = await _produtoRepositorio.TodosProdutos();
             return View(produtos);
         }
