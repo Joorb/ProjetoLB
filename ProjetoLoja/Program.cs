@@ -1,3 +1,5 @@
+using ProjetoLoja.Repositorio;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,10 @@ builder.Services.AddSession(options =>
 
 // REGISTRAR A CONNECTION STRING COMO UM SERVIÇO STRING AQUI
 builder.Services.AddSingleton<string>(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
+builder.Services.AddScoped<ProdutoRepositorio>();
+builder.Services.AddScoped<PedidoRepositorio>();
+builder.Services.AddScoped<CarrinhoRepositorio>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
