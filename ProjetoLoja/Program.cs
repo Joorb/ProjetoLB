@@ -5,8 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-
 // 1. Configurar os serviços de sessão
 builder.Services.AddSession(options =>
 {
@@ -15,14 +13,14 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true; // Define o cookie como essencial para o funcionamento da aplicação
 });
 
-var app = builder.Build();
-
 // REGISTRAR A CONNECTION STRING COMO UM SERVIÇO STRING AQUI
 builder.Services.AddSingleton<string>(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
 builder.Services.AddScoped<ProdutoRepositorio>();
 builder.Services.AddScoped<PedidoRepositorio>();
 builder.Services.AddScoped<CarrinhoRepositorio>();
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
